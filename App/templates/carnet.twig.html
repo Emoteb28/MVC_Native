@@ -1,0 +1,57 @@
+{% extends "BaseTemplate.html" %}
+{% block title %}Personnes du Carnet{% endblock %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+<h2>{{titre}}</h2>
+<table class="table table-striped">
+    <tr>
+        <td>ID</td>
+        <td>Nom</td>
+        <td>Prenom</td>
+        <td>Naissance</td>
+        <td>Ville</td>
+        <td>Suppression</td>
+    </tr>
+    {% for ami in amis %}
+    <tr>
+        <td>{{ami.ID}}</td>
+        <td>
+            <a href="index.php?action=detail&id={{ami.ID}}&nom={{ami.NOM}}&prenom={{ami.PRENOM}}">
+                {{ami.NOM}}
+            </a>
+        </td>
+        <td>{{ami.PRENOM}}</td>
+        <td>{{ami.NAISSANCE}}</td>
+        <td>{{ami.VILLE}}</td>
+        <td>
+            <a href="index.php?action=suppr&message=''&id={{ami.ID}}">
+                X
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <form method="GET" action="index.php">
+            <td><input type="hidden" name="action" value="add"></td>
+            <td><input type="text" name="nom" required></td>
+            <td><input type="text" name="prenom" required></td>
+            <td><input type="date" name="naissance" required></td>
+            <td><input type="text" name="ville"></td>
+            <td><input type="submit" value="+"></td>
+        </form>
+    </tr>
+</table>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+<p class="primary">
+    Bravo
+</p>
+{% endblock %}
